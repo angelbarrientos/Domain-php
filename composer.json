@@ -1,5 +1,15 @@
 {
     "name": "pagofacil/domain-php",
+    "license": "MIT",
     "type": "project",
-    "require": {}
+    "require": {
+        "php": "^7.3",
+        "ramsey/uuid": "3.8.*",
+        "lambdish/phunctional": "v1.0.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "PagoFacil\\Gateway\\": "src/"
+        }
+    }
 }
