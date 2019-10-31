@@ -3,13 +3,13 @@ declare(strict_types=1);
 namespace PagoFacil\Gateway\Gateway\Card\Domain;
 
 use PagoFacil\Gateway\Shared\Domain\Aggregate\Abstracts\AggregateRoot;
-use PagoFacil\Gateway\Shared\Domain\ValueObject\Uuid;
+use PagoFacil\Gateway\Gateway\Card\Domain\CardId;
 use PagoFacil\Gateway\User\Customer\Domain\User;
 
 
 class Card extends AggregateRoot
 {
-    /** @var Uuid $uuid */
+    /** @var CardId $uuid */
     private $uuid = null;
     /** @var string $accountNumber  */
     private $accountNumber = null;
@@ -23,7 +23,7 @@ class Card extends AggregateRoot
     private $user = null;
 
     public function __construct(
-        Uuid $uuid, string $accountNumber, string $expirationMonth, string $expirationYear, string $ctv, User $user
+        CardId $uuid, string $accountNumber, string $expirationMonth, string $expirationYear, string $ctv, User $user
     )
     {
         $this->uuid = $uuid;
@@ -35,9 +35,9 @@ class Card extends AggregateRoot
     }
 
     /**
-     * @return Uuid
+     * @return CardId
      */
-    public function getUuid(): Uuid
+    public function getUuid(): CardId
     {
         return $this->uuid;
     }
