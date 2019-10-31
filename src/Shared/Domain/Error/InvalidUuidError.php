@@ -9,10 +9,6 @@ use Throwable;
 class InvalidUuidError extends DomainError
 {
     const INVALID_UUID = 'invalid_uuid';
-    /** @var string $errorCode */
-    private $errorCode = null;
-    /** @var string $errorMessage */
-    private $errorMessage = null;
 
     /**
      * InvalidUuidError constructor.
