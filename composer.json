@@ -5,11 +5,23 @@
     "require": {
         "php": "^7.3",
         "ramsey/uuid": "3.8.*",
-        "lambdish/phunctional": "v1.0.9"
+        "lambdish/phunctional": "v1.0.9",
+        "league/fractal": "0.18.*",
+        "guzzlehttp/guzzle": "6.4.*",
+        "psr/http-client": "1.0.*",
+        "psr/http-message": "1.0.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "8.4.*"
     },
     "autoload": {
         "psr-4": {
             "PagoFacil\\Gateway\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PagoFacil\\Test\\": "test/src/"
         }
     }
 }
