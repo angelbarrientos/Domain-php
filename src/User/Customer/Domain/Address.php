@@ -2,12 +2,11 @@
 declare(strict_types=1);
 namespace PagoFacil\Gateway\User\Customer\Domain;
 
-use mysql_xdevapi\SqlStatementResult;
-use PagoFacil\Gateway\Shared\Domain\Interfaces\ModelDomain;
+use PagoFacil\Gateway\Shared\Domain\Interfaces\DomainModel;
 use PagoFacil\Gateway\Shared\Domain\ValueObject\Uuid;
 
 
-class Address implements ModelDomain
+class Address implements DomainModel
 {
     /** @var Uuid $id */
     private $id = null;

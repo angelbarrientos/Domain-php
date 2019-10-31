@@ -4,8 +4,7 @@ namespace PagoFacil\Gateway\User\Customer\Domain;
 
 use PagoFacil\Gateway\Shared\Domain\Aggregate\Abstracts\AggregateRoot;
 use PagoFacil\Gateway\Shared\Domain\ValueObject\Uuid;
-use PagoFacil\Gateway\User\Customer\Domain\Contact;
-use PagoFacil\Gateway\User\Customer\Domain\Address;
+use PagoFacil\Gateway\User\Customer\Domain\{Address, Contact};
 
 
 class User extends AggregateRoot

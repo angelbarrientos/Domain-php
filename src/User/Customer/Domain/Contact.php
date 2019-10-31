@@ -2,12 +2,12 @@
 declare(strict_types=1);
 namespace PagoFacil\Gateway\User\Customer\Domain;
 
-use PagoFacil\Gateway\Shared\Domain\Interfaces\ModelDomain;
+use PagoFacil\Gateway\Shared\Domain\Interfaces\DomainModel;
 use PagoFacil\Gateway\Shared\Domain\EmailAddress;
 use PagoFacil\Gateway\Shared\Domain\ValueObject\Uuid;
 
 
-class Contact implements ModelDomain
+class Contact implements DomainModel
 {
     /** @var Uuid $id */
     private $id = null;
