@@ -21,8 +21,12 @@ class Card extends AggregateRoot
     protected $ctv = null;
     /** @var string $cardType */
     protected $cardType = null;
+    /** @var string $sender */
+    protected $sender = null;
     /** @var User $user */
     private $user = null;
+    /** @var string $hashKeyCC */
+    protected $hashKeyCC = null;
 
     public function __construct(
         CardId $uuid, string $accountNumber, string $expirationMonth,
@@ -88,5 +92,21 @@ class Card extends AggregateRoot
     public function getCardType(): string
     {
         return $this->cardType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSender(): string
+    {
+        return $this->sender;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHashKeyCC(): string
+    {
+        return $this->hashKeyCC;
     }
 }

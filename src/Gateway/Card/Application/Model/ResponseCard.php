@@ -14,11 +14,14 @@ class ResponseCard extends Card
      * @param string $expirationYear
      * @param string $ctv
      * @param string $cardType
+     * @param string $sender
+     * @param string $hashKeyCC
      * @return static
      */
     static public function pagoFacilResponse(
         Card $card, string $accountNumber, string $expirationMonth,
-        string $expirationYear, string $ctv, string $cardType
+        string $expirationYear, string $ctv, string $cardType, string $sender,
+        string $hashKeyCC
     ): Card
     {
         $card->accountNumber = $accountNumber;
@@ -26,6 +29,8 @@ class ResponseCard extends Card
         $card->expirationYear = $expirationYear;
         $card->ctv = $ctv;
         $card->cardType = $cardType;
+        $card->sender = $sender;
+        $card->hashKeyCC = $hashKeyCC;
 
         return $card;
     }
