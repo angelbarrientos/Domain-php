@@ -12,15 +12,15 @@ class Card extends AggregateRoot
     /** @var CardId $uuid */
     private $uuid = null;
     /** @var string $accountNumber  */
-    private $accountNumber = null;
+    protected $accountNumber = null;
     /** @var string $expirationMonth */
-    private $expirationMonth = null;
+    protected $expirationMonth = null;
     /** @var string $expirationYear */
-    private $expirationYear = null;
+    protected $expirationYear = null;
     /** @var string $ctv */
-    private $ctv = null;
+    protected $ctv = null;
     /** @var string $cardType */
-    private $cardType = null;
+    protected $cardType = null;
     /** @var User $user */
     private $user = null;
 
@@ -35,20 +35,6 @@ class Card extends AggregateRoot
         $this->expirationYear = $expirationYear;
         $this->ctv = $ctv;
         $this->user = $user;
-    }
-
-    static public function pagoFacilResponse(
-        Card $card, string $accountNumber, string $expirationMonth,
-        string $expirationYear, string $ctv, string $cardType
-    ): self
-    {
-        $card->accountNumber = $accountNumber;
-        $card->expirationMonth = $expirationMonth;
-        $card->expirationYear = $expirationYear;
-        $card->ctv = $ctv;
-        $card->cardType = $cardType;
-
-        return $card;
     }
 
     /**
