@@ -17,15 +17,31 @@ class Order extends AggregateRoot
     private $total = null;
     /** @var User $user */
     private $user = null;
+    /** @var string $plan */
+    private $plan = null;
+    /** @var string $months */
+    private $months = null;
 
+    /**
+     * Order constructor.
+     * @param Uuid $id
+     * @param string $idOrder
+     * @param float $total
+     * @param User $user
+     * @param string $plan
+     * @param string $months
+     */
     public function __construct(
-        Uuid $id, string $idOrder, float $total, User $user
+        Uuid $id, string $idOrder, float $total, User $user, string $plan,
+        string $months
     )
     {
         $this->id = $id;
         $this->idOrder = $idOrder;
         $this->total = $total;
         $this->user = $user;
+        $this->plan = $plan;
+        $this->months = $months;
     }
 
     /**
@@ -58,5 +74,21 @@ class Order extends AggregateRoot
     public function getUser(): User
     {
         return $this->user;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlan(): string
+    {
+        return $this->plan;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMonths(): string
+    {
+        return $this->months;
     }
 }

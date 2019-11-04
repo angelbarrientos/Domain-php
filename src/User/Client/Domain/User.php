@@ -19,6 +19,8 @@ class User extends AggregateRoot
     private $passPhrase = null;
     /** @var EndPoint $endpoint */
     private $endpoint = null;
+    /** @var int $serviceType */
+    private $serviceType = null;
 
     /**
      * User constructor.
@@ -29,7 +31,8 @@ class User extends AggregateRoot
      * @param EndPoint $endPoint
      */
     public function __construct(
-        UserId $id, string $idUser, string $idBranchOffice, string $passPhrase, EndPoint $endPoint
+        UserId $id, string $idUser, string $idBranchOffice, string $passPhrase,
+        EndPoint $endPoint, int $serviceType
     )
     {
         $this->id = $id;
@@ -37,6 +40,7 @@ class User extends AggregateRoot
         $this->idBranchOffice = $idBranchOffice;
         $this->passPhrase = $passPhrase;
         $this->endpoint = $endPoint;
+        $this->serviceType = $serviceType;
     }
 
     /**
@@ -77,5 +81,10 @@ class User extends AggregateRoot
     public function getEndPoint(): EndPoint
     {
         return $this->endpoint;
+    }
+
+    public function getServiceType(): int
+    {
+        return $this->serviceType;
     }
 }
