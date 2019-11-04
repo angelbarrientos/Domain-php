@@ -19,11 +19,14 @@ class Card extends AggregateRoot
     private $expirationYear = null;
     /** @var string $ctv */
     private $ctv = null;
+    /** @var string $cardType */
+    private $cardType = null;
     /** @var User $user */
     private $user = null;
 
     public function __construct(
-        CardId $uuid, string $accountNumber, string $expirationMonth, string $expirationYear, string $ctv, User $user
+        CardId $uuid, string $accountNumber, string $expirationMonth,
+        string $expirationYear, string $ctv, User $user
     )
     {
         $this->uuid = $uuid;
@@ -32,6 +35,20 @@ class Card extends AggregateRoot
         $this->expirationYear = $expirationYear;
         $this->ctv = $ctv;
         $this->user = $user;
+    }
+
+    static public function pagoFacilResponse(
+        Card $card, string $accountNumber, string $expirationMonth,
+        string $expirationYear, string $ctv, string $cardType
+    ): self
+    {
+        $card->accountNumber = $accountNumber;
+        $card->expirationMonth = $expirationMonth;
+        $card->expirationYear = $expirationYear;
+        $card->ctv = $ctv;
+        $card->cardType = $cardType;
+
+        return $card;
     }
 
     /**
@@ -77,5 +94,13 @@ class Card extends AggregateRoot
     public function getUser(): User
     {
         return $this->user;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCardType(): string
+    {
+        return $this->cardType;
     }
 }
