@@ -6,7 +6,8 @@ namespace PagoFacil\Gateway\Shared\Domain;
 
 use PagoFacil\Gateway\Gateway\Card\Domain\Card;
 use PagoFacil\Gateway\Gateway\Order\Domain\Order;
-use PagoFacil\Gateway\Shared\Domain\Aggregate\Abstracts\AggregateRoot;
+use PagoFacil\Gateway\Shared\Domain\Event\Sourcing\AggregateRoot;
+use PagoFacil\Gateway\Shared\Domain\ValueObject\Uuid;
 use PagoFacil\Gateway\User\Client\Domain\User as Client;
 use PagoFacil\Gateway\User\Customer\Domain\User as Customer;
 
@@ -43,6 +44,7 @@ class Transaction extends AggregateRoot
         $this->userCustomer = $userCustomer;
         $this->order = $order;
         $this->card = $card;
+        parent::__construct($this->id);
     }
 
     public static function addResponse(self $transaction): self

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PagoFacil\Gateway\Shared\Domain\Aggregate\Interfaces;
+namespace PagoFacil\Gateway\Shared\Domain\Event\Sourcing\Interfaces;
 
 use PagoFacil\Gateway\Shared\Domain\Interfaces\Event;
 use PagoFacil\Gateway\Shared\Domain\Interfaces\DomainModel;
