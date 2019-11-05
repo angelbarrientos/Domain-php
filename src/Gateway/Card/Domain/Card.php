@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PagoFacil\Gateway\Gateway\Card\Domain;
 
-use PagoFacil\Gateway\Shared\Domain\Aggregate\Abstracts\AggregateRoot;
+use PagoFacil\Gateway\Shared\Domain\Event\Sourcing\AggregateRoot;
 use PagoFacil\Gateway\Gateway\Card\Domain\CardId;
 use PagoFacil\Gateway\User\Customer\Domain\User;
 
@@ -43,6 +43,7 @@ class Card extends AggregateRoot
         $this->expirationYear = $expirationYear;
         $this->ctv = $ctv;
         $this->user = $user;
+        parent::__construct($this->uuid);
     }
 
     /**

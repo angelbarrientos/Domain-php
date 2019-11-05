@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PagoFacil\Gateway\User\Client\Domain;
 
-use PagoFacil\Gateway\Shared\Domain\Aggregate\Abstracts\AggregateRoot;
+use PagoFacil\Gateway\Shared\Domain\Event\Sourcing\AggregateRoot;
 use PagoFacil\Gateway\User\Client\Domain\UserId;
 use PagoFacil\Gateway\User\Client\Domain\EndPoint;
 
@@ -30,6 +30,7 @@ class User extends AggregateRoot
      * @param string $idBranchOffice
      * @param string $passPhrase
      * @param EndPoint $endPoint
+     * @param int $serviceType
      */
     public function __construct(
         UserId $id,
@@ -45,6 +46,7 @@ class User extends AggregateRoot
         $this->passPhrase = $passPhrase;
         $this->endpoint = $endPoint;
         $this->serviceType = $serviceType;
+        parent::__construct($this->id);
     }
 
     /**

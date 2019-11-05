@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PagoFacil\Gateway\Gateway\Order\Domain;
 
 use PagoFacil\Gateway\User\Customer\Domain\User;
-use PagoFacil\Gateway\Shared\Domain\Aggregate\Abstracts\AggregateRoot;
+use PagoFacil\Gateway\Shared\Domain\Event\Sourcing\AggregateRoot;
 use PagoFacil\Gateway\Shared\Domain\ValueObject\Uuid;
 
 class Order extends AggregateRoot
@@ -46,6 +46,7 @@ class Order extends AggregateRoot
         $this->user = $user;
         $this->plan = $plan;
         $this->months = $months;
+        parent::__construct($this->id);
     }
 
     /**

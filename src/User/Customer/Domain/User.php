@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PagoFacil\Gateway\User\Customer\Domain;
 
-use PagoFacil\Gateway\Shared\Domain\Aggregate\Abstracts\AggregateRoot;
+use PagoFacil\Gateway\Shared\Domain\Event\Sourcing\AggregateRoot;
 use PagoFacil\Gateway\Shared\Domain\ValueObject\Uuid;
 use PagoFacil\Gateway\User\Customer\Domain\Address;
 use PagoFacil\Gateway\User\Customer\Domain\Contact;
@@ -34,6 +34,7 @@ class User extends AggregateRoot
         $this->lastName = $lastName;
         $this->contact = $contact;
         $this->address = $address;
+        parent::__construct($this->id);
     }
 
     /**
