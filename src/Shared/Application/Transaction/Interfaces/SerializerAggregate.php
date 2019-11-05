@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PagoFacil\Gateway\Shared\Application\Transaction\Interfaces;
 
 use League\Fractal\TransformerAbstract;
-use PagoFacil\Gateway\Shared\Domain\Aggregate\Interfaces\Aggregate;
+use PagoFacil\Gateway\Shared\Domain\Event\Sourcing\Interfaces\Aggregate;
 
 interface SerializerAggregate
 {
