@@ -1,12 +1,13 @@
 <?php
+
 declare(strict_types=1);
+
 namespace PagoFacil\Gateway\Shared\Infrastructure\Interfaces;
 
 use PagoFacil\Gateway\Shared\Domain\ValueObject\Uuid;
 use PagoFacil\Gateway\Shared\Infrastructure\Interfaces\Dto;
 use PagoFacil\Gateway\Shared\Infrastructure\Error\RepositoryError;
 use PagoFacil\Gateway\Shared\Infrastructure\Interfaces\Repository;
-
 
 interface QueryRepository extends Repository
 {
@@ -23,5 +24,4 @@ interface QueryRepository extends Repository
      * @throws RepositoryError
      */
     public function find(Criteria $criteria): Dto;
-
 }

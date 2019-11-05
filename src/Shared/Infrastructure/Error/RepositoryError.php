@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
+
 namespace PagoFacil\Gateway\Shared\Infrastructure\Error;
 
 use Exception;
 use Throwable;
-
 
 class RepositoryError extends Exception
 {
@@ -24,7 +25,7 @@ class RepositoryError extends Exception
         parent::__construct($message);
     }
 
-    static public function save(string $message): self
+    public static function save(string $message): self
     {
         return new static($message, static::SAVE);
     }
