@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace PagoFacil\Gateway\Shared\Application\Transaction;
 
 use PagoFacil\Gateway\Gateway\Card\Domain\Card;
@@ -7,8 +9,8 @@ use PagoFacil\Gateway\Shared\Domain\Aggregate\Abstracts\AggregateRoot;
 use PagoFacil\Gateway\User\Client\Domain\User;
 use Psr\Http\Client\ClientInterface;
 use PagoFacil\Gateway\Shared\Application\Transaction\Interfaces\TransactionMethod;
-use Psr\Http\Message\{RequestInterface, ResponseInterface};
-
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class Transaction
 {
@@ -32,14 +34,18 @@ class Transaction
     }
 
     public function transacction(): ResponseInterface
-    {}
+    {
+    }
 
     public function verifyTransaction(): ResponseInterface
-    {}
+    {
+    }
 
     protected function createMethod(): array
-    {}
+    {
+    }
 
     protected function createData(): array
-    {}
+    {
+    }
 }

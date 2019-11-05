@@ -1,12 +1,13 @@
 <?php
+
 declare(strict_types=1);
+
 namespace PagoFacil\Gateway\Shared\Application\Transaction\Transformers;
 
 use League\Fractal\TransformerAbstract;
 use PagoFacil\Gateway\Shared\Application\Transaction\Interfaces\TransactionMethod;
 use PagoFacil\Gateway\Shared\Domain\Interfaces\DomainModel;
 use PagoFacil\Gateway\Shared\Domain\Transaction;
-
 
 class DataTransforner extends TransformerAbstract
 {
@@ -19,7 +20,7 @@ class DataTransforner extends TransformerAbstract
         /** @var Transaction $transaction */
         return [
             'method' => TransactionMethod::TRANSACTION,
-            'data'=> [
+            'data' => [
                 'idSucursal' => $transaction->getUserClient()->getIdBranchOffice(),
                 'idUsuario' => $transaction->getUserClient()->getIdUser(),
                 'idServicio' => $transaction->getUserClient()->getServiceType(),

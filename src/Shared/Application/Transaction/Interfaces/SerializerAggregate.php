@@ -1,7 +1,8 @@
 <?php
-declare(strict_types=1);
-namespace PagoFacil\Gateway\Shared\Application\Transaction\Interfaces;
 
+declare(strict_types=1);
+
+namespace PagoFacil\Gateway\Shared\Application\Transaction\Interfaces;
 
 use League\Fractal\TransformerAbstract;
 use PagoFacil\Gateway\Shared\Domain\Aggregate\Interfaces\Aggregate;
