@@ -1,9 +1,10 @@
 <?php
+
 declare(strict_types=1);
+
 namespace PagoFacil\Gateway\Gateway\Card\Application\Model;
 
 use PagoFacil\Gateway\Gateway\Card\Domain\Card;
-
 
 class ResponseCard extends Card
 {
@@ -18,12 +19,16 @@ class ResponseCard extends Card
      * @param string $hashKeyCC
      * @return static
      */
-    static public function pagoFacilResponse(
-        Card $card, string $accountNumber, string $expirationMonth,
-        string $expirationYear, string $ctv, string $cardType, string $sender,
+    public static function pagoFacilResponse(
+        Card $card,
+        string $accountNumber,
+        string $expirationMonth,
+        string $expirationYear,
+        string $ctv,
+        string $cardType,
+        string $sender,
         string $hashKeyCC
-    ): Card
-    {
+    ): Card {
         $card->accountNumber = $accountNumber;
         $card->expirationMonth = $expirationMonth;
         $card->expirationYear = $expirationYear;
