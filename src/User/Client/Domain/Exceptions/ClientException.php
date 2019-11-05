@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
+
 namespace PagoFacil\Gateway\User\Client\Domain\Exceptions;
 
 use PagoFacil\Gateway\Shared\Domain\Error\DomainError;
 use Throwable;
-
 
 class ClientException extends DomainError
 {
@@ -17,14 +18,14 @@ class ClientException extends DomainError
      * @param int $code
      * @param Throwable|null $previous
      */
-    protected function __construct(string  $message, string $errorCode, int $code = 0, Throwable $previous = null)
+    protected function __construct(string $message, string $errorCode, int $code = 0, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
         $this->errorMessage = $message;
         $this->errorCode = $errorCode;
     }
 
-    static public function notExist(string $errorMessage): self
+    public static function notExist(string $errorMessage): self
     {
         return new static($errorMessage, static::CLIENT_NOT_EXIST);
     }

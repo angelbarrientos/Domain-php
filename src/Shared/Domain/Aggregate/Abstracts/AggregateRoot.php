@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
+
 namespace PagoFacil\Gateway\Shared\Domain\Aggregate\Abstracts;
 
 use PagoFacil\Gateway\Shared\Domain\Aggregate\Interfaces\Aggregate;
 use PagoFacil\Gateway\Shared\Domain\Interfaces\Event;
-
 
 abstract class AggregateRoot implements Aggregate
 {

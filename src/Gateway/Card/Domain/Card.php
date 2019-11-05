@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
+
 namespace PagoFacil\Gateway\Gateway\Card\Domain;
 
 use PagoFacil\Gateway\Shared\Domain\Aggregate\Abstracts\AggregateRoot;
 use PagoFacil\Gateway\Gateway\Card\Domain\CardId;
 use PagoFacil\Gateway\User\Customer\Domain\User;
-
 
 class Card extends AggregateRoot
 {
@@ -29,10 +30,13 @@ class Card extends AggregateRoot
     protected $hashKeyCC = null;
 
     public function __construct(
-        CardId $uuid, string $accountNumber, string $expirationMonth,
-        string $expirationYear, string $ctv, User $user
-    )
-    {
+        CardId $uuid,
+        string $accountNumber,
+        string $expirationMonth,
+        string $expirationYear,
+        string $ctv,
+        User $user
+    ) {
         $this->uuid = $uuid;
         $this->accountNumber = $accountNumber;
         $this->expirationMonth = $expirationMonth;

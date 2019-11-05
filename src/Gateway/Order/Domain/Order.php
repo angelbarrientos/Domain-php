@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
+
 namespace PagoFacil\Gateway\Gateway\Order\Domain;
 
 use PagoFacil\Gateway\User\Customer\Domain\User;
 use PagoFacil\Gateway\Shared\Domain\Aggregate\Abstracts\AggregateRoot;
 use PagoFacil\Gateway\Shared\Domain\ValueObject\Uuid;
-
 
 class Order extends AggregateRoot
 {
@@ -32,10 +33,13 @@ class Order extends AggregateRoot
      * @param string $months
      */
     public function __construct(
-        Uuid $id, string $idOrder, float $total, User $user, string $plan,
+        Uuid $id,
+        string $idOrder,
+        float $total,
+        User $user,
+        string $plan,
         string $months
-    )
-    {
+    ) {
         $this->id = $id;
         $this->idOrder = $idOrder;
         $this->total = $total;

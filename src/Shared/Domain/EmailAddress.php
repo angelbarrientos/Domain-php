@@ -1,9 +1,10 @@
 <?php
+
 declare(strict_types=1);
+
 namespace PagoFacil\Gateway\Shared\Domain;
 
 use InvalidArgumentException;
-
 
 final class EmailAddress
 {
@@ -29,7 +30,8 @@ final class EmailAddress
     {
         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
             throw new InvalidArgumentException(sprintf(
-                'The email <%s> is not valid', $value
+                'The email <%s> is not valid',
+                $value
             ));
         }
     }
@@ -41,5 +43,4 @@ final class EmailAddress
     {
         return $this->value;
     }
-
 }

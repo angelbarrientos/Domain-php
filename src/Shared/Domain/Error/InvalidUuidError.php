@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
+
 namespace PagoFacil\Gateway\Shared\Domain\Error;
 
 use PagoFacil\Gateway\Shared\Domain\Error\DomainError;
 use Throwable;
-
 
 class InvalidUuidError extends DomainError
 {
@@ -17,18 +18,20 @@ class InvalidUuidError extends DomainError
      * @param int $code
      * @param Throwable|null $previous
      */
-    protected function __construct(string  $message, string $errorCode, int $code = 0, Throwable $previous = null)
+    protected function __construct(string $message, string $errorCode, int $code = 0, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
         $this->errorMessage = $message;
         $this->errorCode = $errorCode;
     }
 
-    static public function Format(string $errorCode, string $errorMessage): self{
+    public static function Format(string $errorCode, string $errorMessage): self
+    {
         return new static($errorMessage, $errorCode);
     }
 
-    static public function isNoValid(string $errorMessage): self {
+    public static function isNoValid(string $errorMessage): self
+    {
         return new static($errorMessage, static::INVALID_UUID);
     }
 

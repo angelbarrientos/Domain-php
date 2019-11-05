@@ -1,11 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PagoFacil\Gateway\Shared\Domain\Error;
 
 use DomainException;
 use Throwable;
-
 
 abstract class DomainError extends DomainException
 {

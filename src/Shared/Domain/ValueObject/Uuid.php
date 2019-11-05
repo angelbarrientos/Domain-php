@@ -1,12 +1,13 @@
 <?php
+
 declare(strict_types=1);
+
 namespace PagoFacil\Gateway\Shared\Domain\ValueObject;
 
 use InvalidArgumentException;
 use Exception;
 use PagoFacil\Gateway\Shared\Domain\Error\InvalidUuidError;
 use Ramsey\Uuid\Uuid as RamseyUuid;
-
 
 class Uuid
 {
@@ -30,7 +31,7 @@ class Uuid
      */
     private function ensureIsValidUuid(string $value): void
     {
-        if(!RamseyUuid::isValid($value)){
+        if (!RamseyUuid::isValid($value)) {
             throw InvalidUuidError::isNoValid(
                 sprintf(
                     '<%s> does not allow the value <%s>.',

@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
+
 namespace PagoFacil\Gateway\User\Client\Domain;
 
 use PagoFacil\Gateway\Shared\Domain\Aggregate\Abstracts\AggregateRoot;
 use PagoFacil\Gateway\User\Client\Domain\UserId;
 use PagoFacil\Gateway\User\Client\Domain\EndPoint;
-
 
 class User extends AggregateRoot
 {
@@ -31,10 +32,13 @@ class User extends AggregateRoot
      * @param EndPoint $endPoint
      */
     public function __construct(
-        UserId $id, string $idUser, string $idBranchOffice, string $passPhrase,
-        EndPoint $endPoint, int $serviceType
-    )
-    {
+        UserId $id,
+        string $idUser,
+        string $idBranchOffice,
+        string $passPhrase,
+        EndPoint $endPoint,
+        int $serviceType
+    ) {
         $this->id = $id;
         $this->idUser = $idUser;
         $this->idBranchOffice = $idBranchOffice;

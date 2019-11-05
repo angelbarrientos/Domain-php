@@ -1,14 +1,16 @@
 <?php
+
 declare(strict_types=1);
+
 namespace PagoFacil\Gateway\Shared\Domain;
 
 use PagoFacil\Gateway\Gateway\Card\Domain\Card;
 use PagoFacil\Gateway\Gateway\Order\Domain\Order;
+use PagoFacil\Gateway\Shared\Domain\Aggregate\Abstracts\AggregateRoot;
 use PagoFacil\Gateway\User\Client\Domain\User as Client;
 use PagoFacil\Gateway\User\Customer\Domain\User as Customer;
 
-
-class Transaction
+class Transaction extends AggregateRoot
 {
     /** @var TransactionId $id */
     private $id = null;
@@ -30,14 +32,22 @@ class Transaction
      * @param Card $card
      */
     public function __construct(
-        TransactionId $id, Client $userClient, Customer $userCustomer, Order $order, Card $card
-    )
-    {
+        TransactionId $id,
+        Client $userClient,
+        Customer $userCustomer,
+        Order $order,
+        Card $card
+    ) {
         $this->id = $id;
         $this->userClient = $userClient;
         $this->userCustomer = $userCustomer;
         $this->order = $order;
         $this->card = $card;
+    }
+
+    public static function addResponse(self $transaction): self
+    {
+        return $transaction;
     }
 
     /**

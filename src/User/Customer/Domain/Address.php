@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
+
 namespace PagoFacil\Gateway\User\Customer\Domain;
 
 use PagoFacil\Gateway\Shared\Domain\Interfaces\DomainModel;
 use PagoFacil\Gateway\Shared\Domain\ValueObject\Uuid;
-
 
 class Address implements DomainModel
 {
@@ -26,10 +27,15 @@ class Address implements DomainModel
     private $cp = null;
 
     public function __construct(
-        Uuid $id, string $street, string $externalNumber, string $suburb, string $municipality, string $state,
-        string $country, string  $cp
-    )
-    {
+        Uuid $id,
+        string $street,
+        string $externalNumber,
+        string $suburb,
+        string $municipality,
+        string $state,
+        string $country,
+        string $cp
+    ) {
         $this->id = $id;
         $this->street = $street;
         $this->externalNumber = $externalNumber;

@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
+
 namespace PagoFacil\Gateway\User\Customer\Domain;
 
 use PagoFacil\Gateway\Shared\Domain\Interfaces\DomainModel;
 use PagoFacil\Gateway\Shared\Domain\EmailAddress;
 use PagoFacil\Gateway\Shared\Domain\ValueObject\Uuid;
-
 
 class Contact implements DomainModel
 {
@@ -19,9 +20,11 @@ class Contact implements DomainModel
     private $email = null;
 
     public function __construct(
-        Uuid $id, string $telephone, string $movilPhone, EmailAddress $email
-    )
-    {
+        Uuid $id,
+        string $telephone,
+        string $movilPhone,
+        EmailAddress $email
+    ) {
         $this->id = $id;
         $this->telephone = $telephone;
         $this->movilPhone = $movilPhone;

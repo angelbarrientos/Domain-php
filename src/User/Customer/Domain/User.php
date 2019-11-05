@@ -1,11 +1,13 @@
 <?php
+
 declare(strict_types=1);
+
 namespace PagoFacil\Gateway\User\Customer\Domain;
 
 use PagoFacil\Gateway\Shared\Domain\Aggregate\Abstracts\AggregateRoot;
 use PagoFacil\Gateway\Shared\Domain\ValueObject\Uuid;
-use PagoFacil\Gateway\User\Customer\Domain\{Address, Contact};
-
+use PagoFacil\Gateway\User\Customer\Domain\Address;
+use PagoFacil\Gateway\User\Customer\Domain\Contact;
 
 class User extends AggregateRoot
 {
@@ -21,9 +23,12 @@ class User extends AggregateRoot
     private $address = null;
 
     public function __construct(
-        Uuid $id, string $name, string $lastName, Contact $contact, Address $address
-    )
-    {
+        Uuid $id,
+        string $name,
+        string $lastName,
+        Contact $contact,
+        Address $address
+    ) {
         $this->id = $id;
         $this->name = $name;
         $this->lastName = $lastName;
