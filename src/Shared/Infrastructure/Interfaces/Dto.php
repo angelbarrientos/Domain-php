@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PagoFacil\Gateway\Shared\Infrastructure;
+namespace PagoFacil\Gateway\Shared\Infrastructure\Interfaces;
 
 interface Dto
 {
