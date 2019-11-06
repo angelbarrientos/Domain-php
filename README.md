@@ -11,8 +11,9 @@ This project has been provided with several tools for ensure the code quality:
 * [PHP Mess Detector]
 * [PHP CS Fixer]
 ```bash
-vendor/bin/phpcbf --standard=PSR2 src/ tests/
 vendor/bin/phpcbf --standard=PSR1 src/ tests/
+vendor/bin/phpcbf --standard=PSR2 src/ tests/
+vendor/bin/phpcbf --standard=PSR12 src/ tests/
 
 vendor/bin/phpmd src/ xml codesize controversial design naming unusedcode --exclude=vendor/
 vendor/bin/phpmd tests/ xml codesize controversial design naming unusedcode --exclude=vendor/
