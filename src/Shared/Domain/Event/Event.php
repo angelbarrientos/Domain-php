@@ -33,8 +33,11 @@ class Event implements EventInterface
     {
         $uuid = Uuid::random();
         $event = new static(
-            $uuid, [], new DateTime(
-                'now', new DateTimeZone(DateTimeZone::UTC)
+            $uuid,
+            [],
+            new DateTime(
+                'now',
+                new DateTimeZone('UTC')
             )
         );
         $event->setEventName($eventName);
@@ -49,7 +52,7 @@ class Event implements EventInterface
 
     /**
      * @param string $key
-     * @param $value
+     * @param mixed $value
      * @return EventInterface
      */
     public function set(string $key, $value): EventInterface
@@ -80,7 +83,7 @@ class Event implements EventInterface
     }
 
     /**
-     * @return Uuid
+     * @return string
      */
     public function getEventId(): string
     {

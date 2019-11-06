@@ -16,7 +16,7 @@ class Transaction
 {
     /** @var ClientInterface $client */
     private $client = null;
-    /** @var \PagoFacil\Gateway\Shared\Domain\Transaction $aggregate */
+    /** @var AggregateRoot $aggregate */
     private $aggregate = null;
     /** @var User $userClientData */
     private $userClientData = null;

@@ -27,10 +27,7 @@ abstract class AggregateRoot implements Aggregate
     {
         $this->aggregateId = $aggregateId;
 
-        try {
-            $date = new DateTime('now', new DateTimeZone(DateTimeZone::UTC));
-        } catch (\Exception $e) {
-        }
+        $date = new DateTime('now', new DateTimeZone('UTC'));
 
         $this->state['_createAt'] = $date->getTimestamp();
         $this->state['_updateAt'] = $date->getTimestamp();

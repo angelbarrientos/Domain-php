@@ -9,7 +9,7 @@ use PagoFacil\Gateway\Gateway\Card\Domain\Card;
 class ResponseCard extends Card
 {
     /**
-     * @param Card $card
+     * @param ResponseCard $card
      * @param string $accountNumber
      * @param string $expirationMonth
      * @param string $expirationYear
@@ -17,10 +17,10 @@ class ResponseCard extends Card
      * @param string $cardType
      * @param string $sender
      * @param string $hashKeyCC
-     * @return static
+     * @return ResponseCard
      */
     public static function pagoFacilResponse(
-        Card $card,
+        self $card,
         string $accountNumber,
         string $expirationMonth,
         string $expirationYear,

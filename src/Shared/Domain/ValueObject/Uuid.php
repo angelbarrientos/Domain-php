@@ -36,7 +36,7 @@ class Uuid
                 sprintf(
                     '<%s> does not allow the value <%s>.',
                     static::class,
-                    is_scalar($value) ? $value : gettype($value)
+                     $value
                 )
             );
         }

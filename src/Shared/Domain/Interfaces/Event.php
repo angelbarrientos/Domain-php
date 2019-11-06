@@ -8,7 +8,7 @@ interface Event
 {
     /**
      * @param string $key
-     * @param $value
+     * @param mixed $value
      * @return Event
      */
     public function set(string $key, $value): Event;

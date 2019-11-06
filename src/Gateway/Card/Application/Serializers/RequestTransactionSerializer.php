@@ -8,13 +8,14 @@ use League\Fractal\Resource\Item;
 use League\Fractal\Resource\ResourceInterface;
 use League\Fractal\Serializer\Serializer;
 use League\Fractal\Manager;
+use League\Fractal\Serializer\SerializerAbstract;
 use League\Fractal\TransformerAbstract;
 use PagoFacil\Gateway\Shared\Domain\Event\Sourcing\Interfaces\Aggregate;
 use PagoFacil\Gateway\Shared\Application\Transaction\Interfaces\SerializerAggregate;
 
 class RequestTransactionSerializer implements SerializerAggregate
 {
-    /** @var Serializer $serializer */
+    /** @var SerializerAbstract $serializer */
     private $serializer = null;
     /** @var Manager $manager  */
     private $manager = null;
@@ -24,9 +25,9 @@ class RequestTransactionSerializer implements SerializerAggregate
     /**
      * RequestTransactionSerializer constructor.
      * @param Manager $manager
-     * @param Serializer $serializer
+     * @param SerializerAbstract $serializer
      */
-    public function __construct(Manager $manager, Serializer $serializer)
+    public function __construct(Manager $manager, SerializerAbstract $serializer)
     {
         $this->manager = $manager;
         $this->serializer = $serializer;
