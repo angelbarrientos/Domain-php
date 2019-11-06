@@ -6,6 +6,7 @@ namespace PagoFacil\Gateway\Shared\Domain\Event;
 
 use DateTimeInterface;
 use DateTime;
+use DateTimeZone;
 use PagoFacil\Gateway\Shared\Domain\Interfaces\Event as EventInterface;
 use PagoFacil\Gateway\Shared\Domain\ValueObject\Uuid;
 
@@ -30,10 +31,11 @@ class Event implements EventInterface
 
     public static function create(string $eventName): EventInterface
     {
+        $uuid = Uuid::random();
         $event = new static(
-            Uuid::random(),
-            [],
-            new DateTime('now', new \DateTimeZone(\DateTimeZone::UTC))
+            $uuid, [], new DateTime(
+                'now', new DateTimeZone(DateTimeZone::UTC)
+            )
         );
         $event->setEventName($eventName);
 
