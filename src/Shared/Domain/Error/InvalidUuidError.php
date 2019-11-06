@@ -25,7 +25,7 @@ class InvalidUuidError extends DomainError
         $this->errorCode = $errorCode;
     }
 
-    public static function Format(string $errorCode, string $errorMessage): self
+    public static function format(string $errorCode, string $errorMessage): self
     {
         return new static($errorMessage, $errorCode);
     }
