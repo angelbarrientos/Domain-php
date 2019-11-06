@@ -10,5 +10,5 @@ use PagoFacil\Gateway\Shared\Domain\ValueObject\Uuid;
 
 class DomainEvent extends Event
 {
-    const EVENT_NAME = 'domain_event';
+    protected static $eventName = 'domain_event';
 }

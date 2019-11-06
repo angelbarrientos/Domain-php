@@ -9,9 +9,9 @@ use Throwable;
 
 class RepositoryError extends Exception
 {
-    const SAVE = 'error_save';
-    const DELETE = 'error_delete';
-    const NOTFONT = 'error_fond';
+    protected static $SAVE = 'error_save';
+    protected static $DELETE = 'error_delete';
+    protected static $NOT_FOUND = 'error_found';
 
     /** @var string $errorCode */
     protected $errorCode = null;
@@ -27,6 +27,6 @@ class RepositoryError extends Exception
 
     public static function save(string $message): self
     {
-        return new static($message, static::SAVE);
+        return new static($message, static::$SAVE);
     }
 }

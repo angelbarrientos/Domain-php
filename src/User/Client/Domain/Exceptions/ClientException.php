@@ -9,7 +9,7 @@ use Throwable;
 
 class ClientException extends DomainError
 {
-    const CLIENT_NOT_EXIST = 'client_not_exist';
+    protected static $CLIENT_NOT_EXIST = 'client_not_exist';
 
     /**
      * InvalidUuidError constructor.
@@ -27,7 +27,7 @@ class ClientException extends DomainError
 
     public static function notExist(string $errorMessage): self
     {
-        return new static($errorMessage, static::CLIENT_NOT_EXIST);
+        return new static($errorMessage, static::$CLIENT_NOT_EXIST);
     }
 
     public function errorCode(): string

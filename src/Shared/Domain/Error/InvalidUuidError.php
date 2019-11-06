@@ -9,7 +9,7 @@ use Throwable;
 
 class InvalidUuidError extends DomainError
 {
-    const INVALID_UUID = 'invalid_uuid';
+    protected static $invalid_uuid = 'invalid_uuid';
 
     /**
      * InvalidUuidError constructor.
@@ -32,7 +32,7 @@ class InvalidUuidError extends DomainError
 
     public static function isNoValid(string $errorMessage): self
     {
-        return new static($errorMessage, static::INVALID_UUID);
+        return new static($errorMessage, static::$invalid_uuid);
     }
 
     /**
