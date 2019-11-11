@@ -45,6 +45,5 @@ class CreateTransactionTest extends TransactionDataProvider
     public function sendTransaction($dataTransaction)
     {
         $this->assertIsArray($dataTransaction);
-        $this->logger->info('data provider', $dataTransaction);
     }
 }

@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace PagoFacil\Gateway\Gateway\Card\Application\Transformers;
 
 use League\Fractal\TransformerAbstract;
+use PagoFacil\Gateway\Shared\Application\Transaction\Interfaces\TransactionMethod;
 use PagoFacil\Gateway\Shared\Domain\Transaction;
 
 class RequestTransformer extends TransformerAbstract
 {
-    public function transformer(Transaction $transaction): array
+    public function transform(Transaction $transaction): array
     {
         return [
-            'method' => 'transaction',
+            'method' => TransactionMethod::TRANSACTION,
             'data' => [
                 'idUsuario' => $transaction->getUserClient()->getIdUser(),
                 'idSucursal' => $transaction->getUserClient()->getIdBranchOffice(),

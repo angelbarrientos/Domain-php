@@ -36,7 +36,8 @@ class Card extends AggregateRoot
         string $expirationYear,
         string $ctv,
         User $user
-    ) {
+    )
+    {
         $this->uuid = $uuid;
         $this->accountNumber = $accountNumber;
         $this->expirationMonth = $expirationMonth;
