@@ -24,7 +24,8 @@ class Contact implements DomainModel
         string $telephone,
         string $movilPhone,
         EmailAddress $email
-    ) {
+    )
+    {
         $this->id = $id;
         $this->telephone = $telephone;
         $this->movilPhone = $movilPhone;

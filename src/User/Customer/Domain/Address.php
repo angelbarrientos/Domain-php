@@ -35,7 +35,8 @@ class Address implements DomainModel
         string $state,
         string $country,
         string $cp
-    ) {
+    )
+    {
         $this->id = $id;
         $this->street = $street;
         $this->externalNumber = $externalNumber;
@@ -108,5 +109,10 @@ class Address implements DomainModel
     public function getCp(): string
     {
         return $this->cp;
+    }
+
+    public function getStreetAndNumber(): string
+    {
+        return "{$this->getStreet()} {$this->getExternalNumber()}";
     }
 }

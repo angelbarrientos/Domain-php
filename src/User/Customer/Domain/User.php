@@ -22,13 +22,22 @@ class User extends AggregateRoot
     /** @var Address $address */
     private $address = null;
 
+    /**
+     * User constructor.
+     * @param Uuid $id
+     * @param string $name
+     * @param string $lastName
+     * @param \PagoFacil\Gateway\User\Customer\Domain\Contact $contact
+     * @param \PagoFacil\Gateway\User\Customer\Domain\Address $address
+     */
     public function __construct(
         Uuid $id,
         string $name,
         string $lastName,
         Contact $contact,
         Address $address
-    ) {
+    )
+    {
         $this->id = $id;
         $this->name = $name;
         $this->lastName = $lastName;

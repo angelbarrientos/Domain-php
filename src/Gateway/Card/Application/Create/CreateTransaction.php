@@ -12,6 +12,7 @@ use PagoFacil\Gateway\Shared\Infrastructure\Interfaces\CommandRepository;
 use PagoFacil\Gateway\Shared\Infrastructure\Interfaces\QueryRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use PagoFacil\Gateway\Shared\Application\Interfaces\UseCase;
 
 class CreateTransaction
 {
@@ -24,7 +25,9 @@ class CreateTransaction
     /** @var CommandRepository $commandRepository  */
     private $commandRepository = null;
     /** @var SerializerAggregate $serializerAggregate */
-    private $serializerAggregate;
+    private $serializerAggregate = null;
+    /** @var ResponseInterface $response */
+    private $response = null;
 
     /**
      * CreateTransaction constructor.
@@ -40,8 +43,7 @@ class CreateTransaction
         QueryRepository $queryRepository,
         CommandRepository $commandRepository,
         SerializerAggregate $serializerAggregate
-    )
-    {
+    ) {
         $this->client = $client;
         $this->logger = $logger;
         $this->queryRepository = $queryRepository;
@@ -55,14 +57,17 @@ class CreateTransaction
      */
     public function sendTransaction(): ResponseInterface
     {
-        return $this->client->request('POST', '/Wstransaccion/format/json?', [
+        $this->response = $this->client->request('POST', '/Wstransaccion/format/json?', [
             'form_params' => [
                 'method' => '',
                 'data' => []
             ]
         ]);
+
+        return $this->response;
     }
 
     protected function createResource(): ResourceInterface
-    {}
+    {
+    }
 }

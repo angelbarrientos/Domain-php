@@ -64,6 +64,6 @@ class Uuid
      */
     public static function random(): self
     {
-        return new self(RamseyUuid::uuid4()->toString());
+        return new static(RamseyUuid::uuid4()->toString());
     }
 }

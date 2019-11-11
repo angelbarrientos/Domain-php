@@ -6,7 +6,6 @@ namespace PagoFacil\Gateway\Gateway\Card\Application\Serializers;
 
 use League\Fractal\Resource\Item;
 use League\Fractal\Resource\ResourceInterface;
-use League\Fractal\Serializer\Serializer;
 use League\Fractal\Manager;
 use League\Fractal\Serializer\SerializerAbstract;
 use League\Fractal\TransformerAbstract;
