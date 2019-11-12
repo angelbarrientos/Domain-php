@@ -31,9 +31,10 @@ class RequestTransactionSerializerTest extends TransactionDataProvider
      */
     public function dataTransformer()
     {
+        $this->assertTrue($this->getTransactionModel() instanceof AggregateRoot);
         $this->assertIsArray($this->request->getArrayData());
+        $this->assertCount(2, $this->request->getArrayData());
         $this->assertArrayHasKey('method', $this->request->getArrayData());
         $this->assertArrayHasKey('data', $this->request->getArrayData());
     }
-
 }

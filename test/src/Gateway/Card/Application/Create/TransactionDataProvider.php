@@ -13,7 +13,6 @@ use PagoFacil\Gateway\Shared\Domain\TransactionId;
 use PagoFacil\Gateway\Shared\Domain\ValueObject\Uuid;
 use PagoFacil\Gateway\User\Client\Domain\EndPoint;
 use PagoFacil\Gateway\User\Client\Domain\UserId;
-use PharIo\Manifest\EmailTest;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use PagoFacil\Gateway\User\Client\Domain\User as UserClient;
@@ -21,6 +20,7 @@ use PagoFacil\Gateway\User\Customer\Domain\User as UserCustomer;
 use PagoFacil\Gateway\User\Customer\Domain\Contact;
 use PagoFacil\Gateway\User\Customer\Domain\Address;
 use PagoFacil\Gateway\Shared\Domain\EmailAddress;
+use Exception;
 
 abstract class TransactionDataProvider extends TestCase
 {
@@ -41,6 +41,9 @@ abstract class TransactionDataProvider extends TestCase
     /** @var EmailAddress $email  */
     protected $email;
 
+    /**
+     * @return array
+     */
     public function transactionProvider():array
     {
         return [
@@ -83,6 +86,9 @@ abstract class TransactionDataProvider extends TestCase
         ];
     }
 
+    /**
+     * @return array
+     */
     public function verifyDataProvider(): array
     {
         return [
@@ -97,6 +103,9 @@ abstract class TransactionDataProvider extends TestCase
         ];
     }
 
+    /**
+     * @throws Exception
+     */
     public function createDomainModels()
     {
         $data = $this->transactionProvider()[0][0];
@@ -125,7 +134,12 @@ abstract class TransactionDataProvider extends TestCase
             $data['data']['idUsuario'],
             $data['data']['idSucursal'],
             '',
-            new EndPoint(Uuid::random(), '', '', ''),
+            new EndPoint(
+                Uuid::random(),
+                $data['endpoint']['url'],
+                $data['endpoint']['endpointTransaction'],
+                $data['endpoint']['endpointVerification']
+            ),
             3
         );
         $this->customer = new UserCustomer(
@@ -155,7 +169,11 @@ abstract class TransactionDataProvider extends TestCase
         );
     }
 
-    protected function getTransactionModel(): AggregateRoot
+    /**
+     * @return Transaction
+     * @throws Exception
+     */
+    protected function getTransactionModel(): Transaction
     {
         return new Transaction(
             TransactionId::random(),
