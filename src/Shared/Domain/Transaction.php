@@ -7,7 +7,6 @@ namespace PagoFacil\Gateway\Shared\Domain;
 use PagoFacil\Gateway\Gateway\Card\Domain\Card;
 use PagoFacil\Gateway\Gateway\Order\Domain\Order;
 use PagoFacil\Gateway\Shared\Domain\Event\Sourcing\AggregateRoot;
-use PagoFacil\Gateway\Shared\Domain\ValueObject\Uuid;
 use PagoFacil\Gateway\User\Client\Domain\User as Client;
 use PagoFacil\Gateway\User\Customer\Domain\User as Customer;
 
