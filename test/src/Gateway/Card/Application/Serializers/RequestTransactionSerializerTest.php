@@ -11,7 +11,6 @@ use PagoFacil\Gateway\Gateway\Card\Application\Transformers\RequestTransformer;
 use PagoFacil\Gateway\Shared\Domain\Event\Sourcing\AggregateRoot;
 use PagoFacil\Test\Gateway\Card\Application\Create\TransactionDataProvider;
 
-
 class RequestTransactionSerializerTest extends TransactionDataProvider
 {
     /** @var RequestTransaction $request  */

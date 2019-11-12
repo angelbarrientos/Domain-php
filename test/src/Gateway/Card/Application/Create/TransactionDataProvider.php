@@ -7,7 +7,6 @@ namespace PagoFacil\Test\Gateway\Card\Application\Create;
 use PagoFacil\Gateway\Gateway\Card\Domain\Card;
 use PagoFacil\Gateway\Gateway\Card\Domain\CardId;
 use PagoFacil\Gateway\Gateway\Order\Domain\Order;
-use PagoFacil\Gateway\Shared\Domain\Event\Sourcing\AggregateRoot;
 use PagoFacil\Gateway\Shared\Domain\Transaction;
 use PagoFacil\Gateway\Shared\Domain\TransactionId;
 use PagoFacil\Gateway\Shared\Domain\ValueObject\Uuid;
@@ -28,6 +27,8 @@ abstract class TransactionDataProvider extends TestCase
     protected $logger;
     /** @var UserClient $client */
     protected $client;
+    /** @var UserClient $clientBadCredentials */
+    protected $clientBadCredentials;
     /** @var UserCustomer $customer  */
     protected $customer;
     /** @var Order */
@@ -44,7 +45,7 @@ abstract class TransactionDataProvider extends TestCase
     /**
      * @return array
      */
-    public function transactionProvider():array
+    public function transactionProvider(): array
     {
         return [
             [
@@ -80,7 +81,15 @@ abstract class TransactionDataProvider extends TestCase
                         'url' => 'https://sandbox.pagofacil.tech',
                         'endpointTransaction' => '/Wsrtransaccion/index/format/json?',
                         'endpointVerification' => '/Wsrtransaccion/index/format/json?'
-                    ]
+                    ],
+                    'credentials' => [
+                        "idSucursal" => "e147ee31531d815e2308d6d6d39929ab599deb98",
+                        "idUsuario" => "f541b3f11f0f9b3fb33499684f22f6d711f2af58",
+                    ],
+                    'fake_credentials' => [
+                        "idSucursal" => "e147ee31531d815e2308d6d6d39929ab599deb98",
+                        "idUsuario" => "f541b3f11f0f9b3fb33499684f22f6d711f2af58",
+                    ],
                 ]
             ]
         ];
@@ -131,8 +140,21 @@ abstract class TransactionDataProvider extends TestCase
 
         $this->client = new UserClient(
             UserId::random(),
-            $data['data']['idUsuario'],
-            $data['data']['idSucursal'],
+            $data['credentials']['idUsuario'],
+            $data['credentials']['idSucursal'],
+            '',
+            new EndPoint(
+                Uuid::random(),
+                $data['endpoint']['url'],
+                $data['endpoint']['endpointTransaction'],
+                $data['endpoint']['endpointVerification']
+            ),
+            3
+        );
+        $this->clientBadCredentials = new UserClient(
+            UserId::random(),
+            $data['fake_credentials']['idUsuario'],
+            $data['fake_credentials']['idSucursal'],
             '',
             new EndPoint(
                 Uuid::random(),
@@ -178,6 +200,21 @@ abstract class TransactionDataProvider extends TestCase
         return new Transaction(
             TransactionId::random(),
             $this->client,
+            $this->customer,
+            $this->order,
+            $this->card
+        );
+    }
+
+    /**
+     * @return Transaction
+     * @throws Exception
+     */
+    protected function getFakeTransactionModel(): Transaction
+    {
+        return new Transaction(
+            TransactionId::random(),
+            $this->clientBadCredentials,
             $this->customer,
             $this->order,
             $this->card

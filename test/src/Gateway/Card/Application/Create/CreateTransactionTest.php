@@ -15,14 +15,11 @@ use PagoFacil\Gateway\Gateway\Card\Application\Serializers\RequestTransactionSer
 use PagoFacil\Gateway\Gateway\Card\Application\Transformers\RequestTransformer;
 use PagoFacil\Gateway\Shared\Application\Transaction\Interfaces\SerializerAggregate;
 use PagoFacil\Gateway\Shared\Domain\Event\Sourcing\AggregateRoot;
-use PagoFacil\Gateway\Shared\Domain\Transaction;
 use PagoFacil\Gateway\Shared\Infrastructure\Interfaces\CommandRepository;
 use PagoFacil\Gateway\Shared\Infrastructure\Interfaces\QueryRepository;
 use Monolog\Logger;
-use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
-use Psr\Log\LoggerInterface;
 use Exception;
 
 class CreateTransactionTest extends TransactionDataProvider
@@ -39,6 +36,10 @@ class CreateTransactionTest extends TransactionDataProvider
     protected $response;
     /** @var CardServiceInterface */
     protected $useCase;
+    /** @var CardServiceInterface */
+    protected $useCaseFail;
+    /** @var array $responseContent  */
+    protected $responseContent;
 
     public function setUp(): void
     {
@@ -54,20 +55,42 @@ class CreateTransactionTest extends TransactionDataProvider
         $this->request = new RequestTransaction(new Manager(), new ArraySerializer());
         $this->request->addItem($this->getTransactionModel(), new RequestTransformer());
         $this->useCase = $this->createService();
+        $this->useCaseFail = $this->createBadService();
     }
 
-    protected function createService():CardServiceInterface
+    protected function createService(): CardServiceInterface
     {
         /** @var CreateTransaction $useCase */
         $useCase = null;
         try {
-             $useCase = new CreateTransaction(
+            $useCase = new CreateTransaction(
                 $this->clientPSR7,
                 $this->logger,
                 $this->queryRepository,
                 $this->commandRepository,
                 $this->request,
                 $this->getTransactionModel()
+            );
+        } catch (Exception $exception) {
+            $this->logger->error($exception->getMessage());
+            $this->logger->error($exception->getTraceAsString());
+        }
+
+        return $useCase;
+    }
+
+    protected function createBadService(): CardServiceInterface
+    {
+        /** @var CreateTransaction $useCase */
+        $useCase = null;
+        try {
+            $useCase = new CreateTransaction(
+                $this->clientPSR7,
+                $this->logger,
+                $this->queryRepository,
+                $this->commandRepository,
+                $this->request,
+                $this->getFakeTransactionModel()
             );
         } catch (Exception $exception) {
             $this->logger->error($exception->getMessage());
@@ -97,7 +120,6 @@ class CreateTransactionTest extends TransactionDataProvider
      */
     public function sendTransaction()
     {
-
         try {
             $this->response = $this->useCase->sendTransaction();
         } catch (GuzzleException | Exception $exception) {
@@ -109,12 +131,37 @@ class CreateTransactionTest extends TransactionDataProvider
         $this->assertEquals(200, $this->response->getStatusCode());
         $this->assertIsArray($this->response->getHeaders());
         $this->assertInstanceOf(StreamInterface::class, $this->response->getBody());
+
+        $this->responseContent = json_decode($this->response->getBody()->getContents(), true);
+
+        $this->assertIsArray($this->responseContent);
+        $this->assertArrayHasKey('WebServices_Transacciones', $this->responseContent);
+        //$this->assertEquals(1,$this->responseContent['WebServices_Transacciones']['transaccion']['autorizado']);
     }
 
     /**
      * @test
-     * @depends sendTransaction
+     * @depends instanceOfValidate
      */
-    public function validateResponse()
-    {}
+    public function failTransaction()
+    {
+        try {
+            $this->response = $this->useCaseFail->sendTransaction();
+        } catch (GuzzleException | Exception $exception) {
+            $this->logger->error($exception->getMessage());
+            $this->logger->error($exception->getTraceAsString());
+        }
+
+        $this->assertInstanceOf(ResponseInterface::class, $this->response);
+        $this->assertEquals(200, $this->response->getStatusCode());
+        $this->assertIsArray($this->response->getHeaders());
+        $this->assertInstanceOf(StreamInterface::class, $this->response->getBody());
+
+        $this->responseContent = json_decode($this->response->getBody()->getContents(), true);
+
+        $this->assertIsArray($this->responseContent);
+        $this->assertArrayHasKey('WebServices_Transacciones', $this->responseContent);
+        $this->assertEquals(0, $this->responseContent['WebServices_Transacciones']['transaccion']['autorizado']);
+        $this->logger->info('', $this->responseContent['WebServices_Transacciones']['transaccion']);
+    }
 }
