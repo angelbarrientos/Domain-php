@@ -32,7 +32,7 @@ vendor/bin/phpstan analyse -l 7 src tests
 
 * [PHPUnit]
 ```bash
-vendor/bin/phpunit -c phpunit.xml
+vendor/bin/phpunit
 ```
 
 [PHP Code Sniffer]:https://github.com/squizlabs/PHP_CodeSniffer/wiki
