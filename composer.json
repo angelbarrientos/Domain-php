@@ -9,7 +9,6 @@
         "ext-json": "*",
         "ext-curl": "*",
         "ramsey/uuid": "3.8.*",
-        "lambdish/phunctional": "v1.0.9",
         "league/fractal": "0.18.*",
         "guzzlehttp/guzzle": "6.4.*",
         "psr/http-client": "1.0.*",
