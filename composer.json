@@ -1,5 +1,6 @@
 {
     "name": "pagofacil/domain-php",
+    "description": "Pago facil domain modeling",
     "license": "MIT",
     "type": "project",
     "require": {
