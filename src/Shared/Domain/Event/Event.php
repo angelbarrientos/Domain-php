@@ -23,8 +23,7 @@ class Event implements EventInterface
         Uuid $eventId,
         array $payload,
         DateTimeInterface $eventAt
-    )
-    {
+    ) {
         $this->eventId = $eventId;
         $this->payload = $payload;
         $this->eventAt = $eventAt->getTimestamp();

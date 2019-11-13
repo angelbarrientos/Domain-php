@@ -8,7 +8,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use Closure;
 use GuzzleHttp\Psr7\Response;
-use League\Fractal\Resource\ResourceInterface;
+use PagoFacil\Gateway\Gateway\Card\Application\Exceptions\PagoFacilException;
 use PagoFacil\Gateway\Gateway\Card\Application\Interfaces\CardServiceInterface;
 use PagoFacil\Gateway\Shared\Application\Transaction\Interfaces\SerializerAggregate;
 use PagoFacil\Gateway\Shared\Domain\Transaction;
@@ -39,6 +39,8 @@ class CreateTransaction implements CardServiceInterface
      * @var Transaction $transaction
      */
     private $transaction;
+    /** @var array $body */
+    private $body;
 
     /**
      * CreateTransaction constructor.
@@ -68,6 +70,7 @@ class CreateTransaction implements CardServiceInterface
     /**
      * @return ResponseInterface
      * @throws GuzzleException
+     * @throws PagoFacilException
      */
     public function sendTransaction(): ResponseInterface
     {
@@ -76,7 +79,9 @@ class CreateTransaction implements CardServiceInterface
             $this->transaction->getUserClient()->getEndPoint()->getEndpointTransaction(),
             [
                 'query' => urldecode(http_build_query($this->serializerAggregate->getArrayData()))
-            ]);
+            ]
+        );
+
 
         return $this->response;
     }
@@ -116,11 +121,35 @@ class CreateTransaction implements CardServiceInterface
         return $response;
     }
 
-    protected function createResource(): ResourceInterface
+    /**
+     * @return ResponseInterface
+     * @throws PagoFacilException
+     */
+    public function validateResponse(): ResponseInterface
     {
+        if (200 !== $this->response->getStatusCode()) {
+            throw PagoFacilException::apiErrorCommunication('bad request');
+        }
+
+        $this->body = json_decode($this->response->getBody()->getContents(), true);
+        $auth = $this->body['WebServices_Transacciones']['transaccion']['autorizado'];
+
+        switch (true) {
+            case 0 == $auth:
+                throw PagoFacilException::validate($this->body['WebServices_Transacciones']['transaccion']['pf_message']);
+            case 1 == $auth:
+                break;
+        }
+
+        return $this->response;
     }
 
-    public function sendTransactionWithCURL(Closure $closure ): ResponseInterface
+    public function getBody(): array
+    {
+        return $this->body;
+    }
+
+    public function sendTransactionWithCURL(Closure $closure): ResponseInterface
     {
         return new Response();
     }

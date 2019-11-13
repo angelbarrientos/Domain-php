@@ -37,8 +37,7 @@ class Transaction extends AggregateRoot
         Customer $userCustomer,
         Order $order,
         Card $card
-    )
-    {
+    ) {
         $this->id = $id;
         $this->userClient = $userClient;
         $this->userCustomer = $userCustomer;

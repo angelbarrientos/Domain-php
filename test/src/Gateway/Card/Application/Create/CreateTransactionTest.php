@@ -17,6 +17,7 @@ use PagoFacil\Gateway\Shared\Application\Transaction\Interfaces\SerializerAggreg
 use PagoFacil\Gateway\Shared\Domain\Event\Sourcing\AggregateRoot;
 use PagoFacil\Gateway\Shared\Infrastructure\Interfaces\CommandRepository;
 use PagoFacil\Gateway\Shared\Infrastructure\Interfaces\QueryRepository;
+use PagoFacil\Gateway\Gateway\Card\Application\Exceptions\PagoFacilException;
 use Monolog\Logger;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -145,6 +146,8 @@ class CreateTransactionTest extends TransactionDataProvider
      */
     public function failTransaction()
     {
+        $this->expectException(PagoFacilException::class);
+
         try {
             $this->response = $this->useCaseFail->sendTransaction();
         } catch (GuzzleException | Exception $exception) {
@@ -157,11 +160,6 @@ class CreateTransactionTest extends TransactionDataProvider
         $this->assertIsArray($this->response->getHeaders());
         $this->assertInstanceOf(StreamInterface::class, $this->response->getBody());
 
-        $this->responseContent = json_decode($this->response->getBody()->getContents(), true);
-
-        $this->assertIsArray($this->responseContent);
-        $this->assertArrayHasKey('WebServices_Transacciones', $this->responseContent);
-        $this->assertEquals(0, $this->responseContent['WebServices_Transacciones']['transaccion']['autorizado']);
-        $this->logger->info('', $this->responseContent['WebServices_Transacciones']['transaccion']);
+        $this->useCaseFail->validateResponse();
     }
 }

@@ -39,8 +39,7 @@ class User extends AggregateRoot
         string $passPhrase,
         EndPoint $endPoint,
         int $serviceType
-    )
-    {
+    ) {
         $this->id = $id;
         $this->idUser = $idUser;
         $this->idBranchOffice = $idBranchOffice;

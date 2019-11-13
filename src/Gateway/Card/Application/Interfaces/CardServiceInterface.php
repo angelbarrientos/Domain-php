@@ -12,4 +12,8 @@ interface CardServiceInterface
     public function sendTransaction(): ResponseInterface;
 
     public function sendTransactionWithCURL(Closure $closure): ResponseInterface;
+
+    public function validateResponse(): ResponseInterface;
+
+    public function getBody(): array;
 }

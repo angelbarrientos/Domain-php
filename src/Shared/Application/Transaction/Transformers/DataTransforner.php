@@ -12,10 +12,10 @@ use PagoFacil\Gateway\Shared\Domain\Transaction;
 class DataTransforner extends TransformerAbstract
 {
     /**
-     * @param DomainModel $transaction
+     * @param Transaction $transaction
      * @return array
      */
-    public function transform(DomainModel $transaction): array
+    public function transform(Transaction $transaction): array
     {
         /** @var Transaction $transaction */
         return [

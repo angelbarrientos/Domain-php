@@ -39,8 +39,7 @@ class Order extends AggregateRoot
         User $user,
         string $plan,
         string $months
-    )
-    {
+    ) {
         $this->id = $id;
         $this->idOrder = $idOrder;
         $this->total = $total;

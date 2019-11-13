@@ -7,7 +7,6 @@ namespace PagoFacil\Gateway\Shared\Application\Error;
 use \Exception;
 use Throwable;
 
-
 abstract class ApplicationError extends Exception
 {
     /** @var string $errorCode */

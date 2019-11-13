@@ -9,6 +9,7 @@ use Throwable;
 
 class InvalidUuidError extends DomainError
 {
+    /** @var string $invalid_uuid */
     protected static $invalid_uuid = 'invalid_uuid';
 
     /**
@@ -25,11 +26,20 @@ class InvalidUuidError extends DomainError
         $this->errorCode = $errorCode;
     }
 
+    /**
+     * @param string $errorCode
+     * @param string $errorMessage
+     * @return static
+     */
     public static function format(string $errorCode, string $errorMessage): self
     {
         return new static($errorMessage, $errorCode);
     }
 
+    /**
+     * @param string $errorMessage
+     * @return static
+     */
     public static function isNoValid(string $errorMessage): self
     {
         return new static($errorMessage, static::$invalid_uuid);

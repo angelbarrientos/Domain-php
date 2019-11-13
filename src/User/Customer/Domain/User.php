@@ -36,8 +36,7 @@ class User extends AggregateRoot
         string $lastName,
         Contact $contact,
         Address $address
-    )
-    {
+    ) {
         $this->id = $id;
         $this->name = $name;
         $this->lastName = $lastName;

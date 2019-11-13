@@ -35,8 +35,7 @@ class Address implements DomainModel
         string $state,
         string $country,
         string $cp
-    )
-    {
+    ) {
         $this->id = $id;
         $this->street = $street;
         $this->externalNumber = $externalNumber;
